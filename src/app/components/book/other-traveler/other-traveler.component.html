@@ -1,0 +1,23 @@
+<div>
+  <h3>Other traveller(s) details:</h3>
+  <table class="table table-sm">
+    <div *ngFor="let traveller of travellers">
+      <tr>
+        <th>Title:</th>
+        <td>{{traveller.title}}</td>
+      </tr>
+      <tr>
+        <th>Last name:</th>
+        <td>{{traveller.name}}</td>
+      </tr>
+      <tr>
+        <th>First Names:</th>
+        <td>{{traveller.surname}}</td>
+      </tr>
+      <tr>
+        <th>Seat:</th>
+        <td>{{traveller.seat}}</td>
+      </tr>
+    </div>
+  </table>
+</div>

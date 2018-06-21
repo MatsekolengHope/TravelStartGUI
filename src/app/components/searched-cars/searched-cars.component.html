@@ -1,0 +1,108 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div role="navigation">
+        <div class="navbar navbar-inverse">
+            <a href="/" class="navbar-brand">Travelstart</a>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Flights</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Hotels</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href=#>Cars</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" routerLink="/list-users">Users</a>
+                    </li>
+
+                </ul>
+                <div class="navbar navbar-inverse">
+                    <a class="nav-link" routerLink="/sign-in">Login</a>
+                </div>
+                <div class="navbar navbar-inverse">
+                    <a class="nav-link" routerLink="/sign-up">New Registration</a>
+                    <br>
+                </div> 
+            </div>
+        </div>
+    </div>
+</nav>
+
+<div class="container" id="Home">
+    <div class="jumbotron text-center">
+        <h1>Searched Cars</h1>
+    </div>
+    <div *ngIf="searchedCars.length > 0">
+        
+    <form class="form-horizontal" #searchForm="ngForm" (ngSubmit)="searchCar(searchForm.value)">
+        <div class="input-group mb-3">
+            <div>Pick-up Location
+                <input type="text" name="pickUpLocation" class="form-control" placeholder="Pick-up Location" ngModel> Drop-off Location
+                <input type="text" name="dropOffLocation" class="form-control" placeholder="Drop-off Location" ngModel>
+            </div>
+            <div>Pick-up Date
+                <input type="date" name="pickUpDate" class="form-control"  ngModel>Drop-off Date
+                <input type="date" name="dropOffDate" class="form-control"  ngModel>
+            </div>
+            <div>Pick-up Time
+                <input type="time" name="pickUpTime" class="form-control"  ngModel>Drop-off Time
+                <input type="time" name="dropOffTime" class="form-control"  ngModel>
+            </div>
+        </div>
+        <div class="input-group-append">
+            <button class="btn btn-outline-secondary" type="submit">Search</button>
+        </div>
+    </form>
+        <br>
+        <table class="table table-hover table-striped table-sm">
+            <thead class="thead-light">
+                <tr>
+                    <th>Car Name - Model</th>
+                    <th>Capacity</th>
+                    <th>Laggage - Bags</th>
+                    <th>Fuel Policy</th>
+                    <th>Cost</th>
+                    <th>Telephone Number</th>
+                    <th>Fee</th>
+                </tr>
+            </thead>
+            <tr *ngFor="let searchedCar of searchedCars">
+                <td>{{searchedCar.model}}</td>
+                <td>{{searchedCar.capacity}}</td>
+                <td>{{searchedCar.lagage_bags}}</td>
+                <td>{{searchedCar.fuelPolicy}}</td>
+                <td>R {{searchedCar.cost}}</td>
+                <td>{{searchedCar.phoneNo}}</td>
+                <td>
+                    <button class="btn btn-link" id="Hotels" href="#" (click)="selectCar(searchedCar)">Select</button>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div *ngIf="searchedCars.length == 0">
+        <h3>Sorry, no cars match your search! Please try again.</h3>
+
+        
+    <form class="form-horizontal" #searchForm="ngForm" (ngSubmit)="searchCar(searchForm.value)">
+        <div class="input-group mb-3">
+            <div>Pick-up Location
+                <input type="text" name="pickUpLocation" class="form-control" placeholder="Pick-up Location" ngModel> Drop-off Location
+                <input type="text" name="dropOffLocation" class="form-control" placeholder="Drop-off Location" ngModel>
+            </div>
+            <div>Pick-up Date
+                <input type="date" name="pickUpDate" class="form-control" placeholder="Pick-up Date" ngModel>Drop-off Date
+                <input type="date" name="dropOffDate" class="form-control" placeholder="Drop-off Date" ngModel>
+            </div>
+            <div>Pick-up Time
+                <input type="time" name="pickUpTime" class="form-control"  ngModel>Drop-off Time
+                <input type="time" name="dropOffTime" class="form-control"  ngModel>
+            </div>
+        </div>
+        <div class="input-group-append">
+            <button class="btn btn-outline-secondary" type="submit">Search</button>
+        </div>
+    </form>
+    </div>
+</div>

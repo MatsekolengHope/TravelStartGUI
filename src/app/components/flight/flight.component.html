@@ -1,0 +1,61 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div role="navigation">
+    <div class="navbar navbar-inverse">
+      <a href="/" class="navbar-brand">Travelstart</a>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="#">Flights</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Hotels</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href=#>Cars</a>
+          </li>
+        </ul>
+        <div class="navbar navbar-inverse">
+          <a class="nav-link" routerLink="/sign-in">Login</a>
+        </div>
+        <div class="navbar navbar-inverse">
+          <a class="nav-link" routerLink="/sign-up">New Registration</a>
+          <br>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<div class="container">
+<table class="table">
+  <thead class="thead-light">
+    <tr>
+      <th>Departure City</th>
+      <th>Departure Date</th>
+      <th>Departure Time</th>
+      <th>Arrival City</th>
+      <th>Arrival Date</th>
+      <th>Arrival Time</th>
+      <th>Fare Adult</th>
+      <th>Fare Child</th>
+      <th>Capacity-#</th>
+      <th>Available Tickets</th>
+    </tr>
+  </thead>
+  <tr>
+    <td>{{selectedFlight.departurecity}}</td>
+    <td>{{selectedFlight.departuredate}}</td>
+    <td>{{selectedFlight.departuretime}}</td>
+    <td>{{selectedFlight.arrivalcity}}</td>
+    <td>{{selectedFlight.arrivaldate}}</td>
+    <td>{{selectedFlight.arrivaltime}}</td>
+    <td>R {{selectedFlight.fareAdult}}</td>
+    <td>R {{selectedFlight.fareChild}}</td>
+    <td>{{selectedFlight.capacity}}</td>
+    <td>{{selectedFlight.capacity - selectedFlight.bookedTickets}}</td>
+</table>
+<br>
+<div>
+  <button class="btn btn-outline-secondary" type="submit" (click)="onSubmit(selectedFlight)">Continue</button>
+</div>
+</div>

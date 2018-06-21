@@ -1,0 +1,100 @@
+<div style="text-align: center">
+  <h1 class="jumbotron bg-secondary text-white">
+    Flight List!
+  </h1>
+  <table class="table table-hover table-sm">
+    <thead class="thead-light">
+      <tr>
+        <th>Departure City</th>
+        <th>Departure Date</th>
+        <th>Departure Time</th>
+        <th>Arrival City</th>
+        <th>Arrival Date</th>
+        <th>Arrival Time</th>
+        <th></th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+    <tr *ngFor="let flight of flights">
+      <td>{{flight.departurecity}}</td>
+      <td>{{flight.departuredate}}</td>
+      <td>{{flight.departuretime}}</td>
+      <td>{{flight.arrivalcity}}</td> 
+      <td>{{flight.arrivaldate}}</td>
+      <td>{{flight.arrivaltime}}</td>
+      <td>
+        <a (click)="viewBookings(flight)">
+          <button class="btn btn-outline-secondary" type="submit">View Bookings</button>
+        </a>
+      </td>
+      <td>
+        <a (click)="update(flight)">
+          <button class="btn btn-outline-secondary" type="submit">Update</button>
+        </a>
+      </td>
+      <td>
+        <a (click)="delete(flight)">
+          <button class="btn btn-danger" type="submit">Delete</button>
+        </a>
+      </td>
+    </tr>
+  </table> 
+</div>
+
+<!--Admin flight update tab-->
+<div *ngIf="FlightUpdate!=null">
+    <h3>Update Flight Details</h3>
+    <form class="emp-form" #flightForm="ngForm" name="submitForm">
+      <div class="form group">
+        <input type="hidden" name="id" class="form-control" [(ngModel)]="flight.id">
+      </div>
+
+      <div>
+        <label>Flight Name
+          <input type="text" name="name" class="form-control" [(ngModel)]="flight.name">
+        </label>
+      </div>
+      <div>
+        <label>Departure City
+          <input type="text" name="departurecity" class="form-control" [(ngModel)]="flight.departurecity">
+        </label>
+        <label>Departure Date
+          <input type="date" name="departuredate" class="form-control" [(ngModel)]="flight.departuredate">
+        </label>
+        <label>Departure Time
+          <input type="time" name="departuretime" class="form-control" [(ngModel)]="flight.departuretime">
+        </label>
+      </div>
+      <div>
+        <label>Arival City
+          <input type="text" name="arrivalcity" class="form-control" [(ngModel)]="flight.arrivalcity">
+        </label>
+        <label>Arival Date
+          <input type="date" name="arrivaldate" class="form-control" [(ngModel)]="flight.arrivaldate">
+        </label>
+        <label>Arival Time
+          <input type="time" name="arrivaltime" class="form-control" [(ngModel)]="flight.arrivaltime">
+        </label>
+      </div>
+      <div>
+        <label>Capacity-#
+          <input type="number" name="capacity" class="form-control" [(ngModel)]="flight.capacity">
+        </label>
+      </div>
+      <div>
+        <label>Fare Adult
+          <input type="number" name="fareAdult" class="form-control" [(ngModel)]="flight.fareAdult">
+        </label>
+        <label>Fare Child
+          <input type="number" name="fareChild" class="form-control" [(ngModel)]="flight.fareChild">
+        </label>
+      </div>
+      <div>
+        <div>
+          <button class="btn btn-outline-secondary" type="submit" (click)="addFlight(flightForm.value); flightForm.reset()">Update Flight Deatails</button>
+          <button class="btn btn-outline-secondary" type="submit" (click)="cancel()">Cancel</button>
+        </div> 
+      </div>
+    </form>
+  </div>

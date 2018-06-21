@@ -1,0 +1,54 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div role="navigation">
+    <div class="navbar navbar-inverse">
+      <a href="/" class="navbar-brand">Travelstart</a>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="#">Flights</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Hotels</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href=#>Cars</a>
+          </li>
+        </ul>
+        <div class="navbar navbar-inverse">
+          <a class="nav-link" routerLink="/sign-in">Login</a>
+        </div>
+        <div class="navbar navbar-inverse">
+          <a class="nav-link" routerLink="/sign-up">New Registration</a>
+          <br>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
+<div class="container text-center border border-primary rounded">
+  <h3>Sign in to Travelstart</h3>
+  <form class="form-horizontal" #userFrom="ngForm" (ngSubmit)="onSubmit(userFrom.value)">
+    <div *ngIf="loginError!=null" class="alert alert-danger form group">
+        
+    </div>
+    <div class="form group">
+      <label>Email address
+        <input type="text" name="email" class="form-control" ngModel>
+      </label>
+    </div>
+    <div class="form group">
+      <label>Password
+        <input type="password" name="password" class="form-control" ngModel>
+      </label>
+    </div>
+    <br>
+    <input type="submit" value="Sign in" class="btn btn-primary">
+  </form>
+  <div>Don't have an account?
+    <a routerLink="/sign-up">
+      <br>
+      <input type="submit" value="Sign up" class="btn btn-link btn-primary">
+    </a>
+  </div>
+  <br>
+</div>

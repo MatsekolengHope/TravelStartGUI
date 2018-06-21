@@ -1,0 +1,257 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div role="navigation">
+    <div class="navbar navbar-inverse">
+      <a href="/" class="navbar-brand">Travelstart</a>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <button class="btn btn-link" id="FlightsAddition" href="#" (click)="tabFunction($event)">Flights Addition</button>
+          </li>
+          <li class="nav-item">
+            <button class="btn btn-link" id="SavedFlights" href="#" (click)="tabFunction($event)">Saved Flights</button>
+          </li>
+          <li class="nav-item">
+            <button class="btn btn-link" id="Bookings" href="#" (click)="tabFunction($event)">Bookings</button>
+          </li>
+          <li class="nav-item">
+            <button class="btn btn-link" id="Profile" href="#" (click)="tabFunction($event)">Profile</button>
+          </li>
+
+        </ul>
+        <div class="navbar navbar-inverse">
+          <a class="nav-link" routerLink="/sign-in">Login</a>
+        </div>
+        <div class="navbar navbar-inverse">
+          <a class="nav-link" routerLink="/sign-up">New Registration</a>
+          <br>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
+<div class="container" id="Profile">
+  <div class="alert alert-success">
+    Welcome to Travelstart
+    <b>Flight Admin</b> Profile: {{u.firstname}} {{u.lastname}}
+  </div>
+
+  <!--Admin flight addition tab-->
+  <div *ngIf="FlightsAddition!=null">
+    <h3>New Flight</h3>
+    <form class="emp-form" #flightForm="ngForm" name="submitForm">
+      <div class="form group">
+        <input type="hidden" name="id" class="form-control" ngModel>
+      </div>
+
+      <div>
+        <label>Flight Name
+          <input type="text" name="name" class="form-control" ngModel>
+        </label>
+      </div>
+      <div>
+        <label>Departure City
+          <input type="text" name="departurecity" class="form-control" ngModel>
+        </label>
+        <label>Departure Date
+          <input type="date" name="departuredate" class="form-control" ngModel>
+        </label>
+        <label>Departure Time
+          <input type="time" name="departuretime" class="form-control" ngModel>
+        </label>
+      </div>
+      <div>
+        <label>Arival City
+          <input type="text" name="arrivalcity" class="form-control" ngModel>
+        </label>
+        <label>Arival Date
+          <input type="date" name="arrivaldate" class="form-control" ngModel>
+        </label>
+        <label>Arival Time
+          <input type="time" name="arrivaltime" class="form-control" ngModel>
+        </label>
+      </div>
+      <div>
+        <label>Capacity-#
+          <input type="number" name="capacity" class="form-control" ngModel>
+        </label>
+      </div>
+      <div>
+        <label>Fare Adult
+          <input type="number" name="fareAdult" class="form-control" ngModel>
+        </label>
+        <label>Fare Child
+          <input type="number" name="fareChild" class="form-control" ngModel>
+        </label>
+      </div>
+      <div>
+        <div>
+          <button class="btn btn-outline-secondary" type="submit" (click)="addFlight(flightForm.value); flightForm.reset()">Save Flight Deatails</button>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <!--Flight list tab-->
+  <div *ngIf="SavedFlights!==null" class="row">
+    <div class="container">
+      <app-listflight></app-listflight>
+    </div>
+  </div>
+
+  <!--Profile tab-->
+  <div *ngIf="Profile!=null" class="row">
+
+    <div *ngIf="Profile!=NULL">
+      <div>
+        <h3>Personal Details:</h3>
+        <div>Title: {{u.title}}</div>
+        <div>Firstname: {{u.firstname}}</div>
+        <div>Lastname: {{u.lastname}}</div>
+        <div>Email address: {{u.email}}</div>
+        <div>Phone no: {{u.phoneno}}</div>
+        <br>
+        <div *ngIf="UpdateProfile==false">
+          <button (click)="showUpdateProfileForm()" class="btn btn-link btn-primary">Update Personal Details</button>
+        </div>
+      </div>
+      <div *ngFor="let address of addresses">
+        <h3>Personal Addresses:</h3>
+        <div>
+          <b>Physical address</b>: {{address.houseNo}}, {{address.street}}</div>
+        <div>{{address.resident}}</div>
+        <div>{{address.province}}</div>
+        <div>{{address.city}}</div>
+        <div>{{address.country}}</div>
+        <div>{{address.residentialCode}}</div>
+        <br>
+        <div>
+          <input type="submit" value="Update Addresses" class="btn btn-link btn-primary">
+        </div>
+      </div>
+      <br>
+      <div *ngIf="UpdateAddress==false">
+        <button class="btn btn-link btn-primary" href="#" (click)="showUpdateAddressForm()">Add Address</button>
+      </div>
+    </div>
+
+    <div *ngIf="UpdateProfile!=false">
+      <h3>Update Your Personal Details</h3>
+      <form class="form-horizontal" #userFrom="ngForm" (ngSubmit)="updateProfile(userFrom.value)">
+        <div class="form group">
+          <input type="hidden" name="id" class="form-control" [(ngModel)]="u.id">
+        </div>
+        <div class="form group">
+          <label>Title
+            <input type="text" name="title" class="form-control" [(ngModel)]="u.title">
+          </label>
+        </div>
+        <div class="form group">
+          <label>First Name
+            <input type="text" name="firstname" class="form-control" [(ngModel)]="u.firstname">
+          </label>
+        </div>
+        <div class="form group">
+          <label>Last Name
+            <input type="text" name="lastname" class="form-control" [(ngModel)]="u.lastname">
+          </label>
+        </div>
+        <div class="form group">
+          <label>Email
+            <input type="text" name="email" class="form-control" [(ngModel)]="u.email">
+          </label>
+        </div>
+        <div class="form group">
+          <label>Phone Number
+            <input type="text" name="phoneno" class="form-control" [(ngModel)]="u.phoneno">
+          </label>
+        </div>
+        <div class="form group">
+          <label>Password
+            <input type="password" name="password" class="form-control" placeholder="New password" ngModel>
+          </label>
+        </div>
+        <input type="submit" value="Save Changes" class="btn btn-primary">
+      </form>
+    </div>
+
+    <div *ngIf="UpdateAddress!=false">
+      <h3>Update Your Personal Address</h3>
+      <form class="form-horizontal" #userFrom="ngForm" (ngSubmit)="updateAddress(userFrom.value)">
+        <div class="form group">
+          <input type="hidden" name="id" class="form-control" [(ngModel)]="address.id">
+        </div>
+        <div class="form group">
+          <label>Country
+            <input type="text" name="title" class="form-control" [(ngModel)]="address.title">
+          </label>
+        </div>
+        <div class="form group">
+          <label>Province
+            <input type="text" name="firstname" class="form-control" [(ngModel)]="address.firstname">
+          </label>
+        </div>
+        <div class="form group">
+          <label>City
+            <input type="text" name="lastname" class="form-control" [(ngModel)]="address.lastname">
+          </label>
+        </div>
+        <div class="form group">
+          <label>Town
+            <input type="text" name="email" class="form-control" [(ngModel)]="address.email">
+          </label>
+        </div>
+        <div class="form group">
+          <label>Recidence
+            <input type="text" name="phoneno" class="form-control" [(ngModel)]="address.phoneno">
+          </label>
+        </div>
+        <div class="form group">
+          <label>Street
+            <input type="text" name="password" class="form-control" [(ngModel)]="address.phoneno">
+          </label>
+        </div>
+        <div class="form group">
+          <label>House number
+            <input type="text" name="password" class="form-control" [(ngModel)]="address.phoneno">
+          </label>
+        </div>
+        <div class="form group">
+          <label>Residential code
+            <input type="number" name="password" class="form-control" [(ngModel)]="address.phoneno">
+          </label>
+        </div>
+        <input type="submit" value="Save Changes" class="btn btn-primary">
+      </form>
+    </div>
+  </div>
+
+  <div *ngIf="Bookings!=null">
+    <h3>Bookings</h3>
+    <table class="table table-hover table-sm">
+      <thead class="thead-light">
+        <tr>
+          <th>Flight number</th>
+          <th>Flight name</th>
+          <th>Traveller name</th>
+          <th>Traveller surname</th>
+          <th>Seat booked</th>
+          <th>Date of booking</th>
+          <th>Email</th>
+          <th>Phone no</th>
+        </tr>
+      </thead>
+      <ng-container *ngFor="let flight of specificFlightBooks">
+        <tr>
+          <td>{{flight.flightId}}</td>
+          <td>{{flight.name}}</td>
+          <td>{{flight.travellerName}}</td>
+          <td>{{flight.travellerSurname}}</td>
+          <td>{{flight.seat}}</td>
+          <td>{{flight.bookDate}}</td>
+          <td>{{flight.email}}</td>
+          <td>{{flight.phoneno}}</td>
+        </tr>
+      </ng-container>
+    </table>
+  </div>
+</div>

@@ -1,0 +1,122 @@
+<div style="text-align: center">
+  <h1 class="jumbotron bg-secondary text-white">
+    Hotel List!
+  </h1>
+  <table class="table table-hover table-sm">
+    <thead class="thead-light">
+      <tr>
+        <th>Property Name</th>
+        <th>Location</th>
+        <th>Address</th>
+        <th>Kitchens</th>
+        <th>Bedrooms</th>
+        <th>Bathrooms</th>
+        <th>Phone number</th>
+        <th>Email</th>
+        <th>Cost per adult</th>
+        <th>Cost per child</th>
+        <th></th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+    <tr *ngFor="let hotel of hotels">
+      <td>{{hotel.name}}</td>
+      <td>{{hotel.location}}</td>
+      <td>{{hotel.address}}</td>
+      <td>{{hotel.kitchens}}</td>
+      <td>{{hotel.bedRooms}}</td>
+      <td>{{hotel.bathRooms}}</td>
+      <td>{{hotel.phoneNo}}</td>
+      <td>{{hotel.email}}</td>
+      <td>{{hotel.costAdult}}</td>
+      <td>{{hotel.costChild}}</td>
+      <td>
+        <a (click)="viewBookings(hotel)">
+          <button class="btn btn-outline-secondary" type="submit">View Bookings</button>
+        </a>
+      </td>
+      <td>
+        <a (click)="update(hotel)">
+          <button class="btn btn-outline-secondary" type="submit">Update</button>
+        </a>
+      </td>
+      <td>
+        <a (click)="delete(hotel)">
+          <button class="btn btn-danger" type="submit">Delete</button>
+        </a>
+      </td>
+    </tr>
+  </table>
+</div>
+
+<!--Admin hotel update tab-->
+<div *ngIf="Hotelsupdate!=null">
+  <h3>Update Hotel Details</h3>
+  <form class="form-horizontal" #flightForm="ngForm" name="submitForm">
+
+    <div class="form group">
+      <input type="hidden" name="id" class="form-control" [(ngModel)]="hotel.id">
+    </div>
+    <div>
+      <label>Hotel Name - Property
+        <input type="text" name="name" class="form-control" [(ngModel)]="hotel.name">
+      </label>
+    </div>
+    <div>
+      <b>Hotel address:</b>
+    </div>
+    <div>
+      <label>Location
+        <input type="text" name="location" class="form-control" [(ngModel)]="hotel.location">
+      </label>
+      <label>Physical Address
+        <input type="text" name="address" class="form-control" [(ngModel)]="hotel.address">
+      </label>
+    </div>
+    <div>
+    </div>
+    <div>
+      <b>Cost details:</b>
+    </div>
+    <div>
+      <label>Cost Per Adult
+        <input type="number" name="costAdult" class="form-control" [(ngModel)]="hotel.costAdult">
+      </label>
+      <label>Cost Per Child
+        <input type="number" name="costChild" class="form-control" [(ngModel)]="hotel.costChild">
+      </label>
+    </div>
+    <div>
+      <b>Contact details:</b>
+    </div>
+    <div>
+      <label>Phone Number
+        <input type="tel" name="phoneNo" class="form-control" [(ngModel)]="hotel.phoneNo">
+      </label>
+      <label>Email address
+        <input type="email" name="email" class="form-control" [(ngModel)]="hotel.email">
+      </label>
+    </div>
+    <div>
+      <b>Rooms:</b>
+    </div>
+    <div>
+      <label>Bathrooms
+        <input type="number" name="bathRooms" class="form-control" [(ngModel)]="hotel.bathRooms">
+      </label>
+      <label>Kitchens
+        <input type="number" name="kitchens" class="form-control" [(ngModel)]="hotel.kitchens">
+      </label>
+      <label>Bedrooms
+        <input type="number" name="bedRooms" class="form-control" [(ngModel)]="hotel.bedRooms">
+      </label>
+    </div>
+    <div>
+      <div>
+        <button class="btn btn-outline-secondary" type="submit" (click)="addHotel(flightForm.value)">Update Hotel Details</button>
+        <button class="btn btn-outline-secondary" type="submit" (click)="cancel()">Cancel</button>
+      </div>
+    </div>
+  </form>
+</div>

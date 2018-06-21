@@ -1,0 +1,76 @@
+<div *ngIf="myBookings!==null">
+  <h3>My bookings</h3>
+  <table class="table table-hover table-sm">
+    <thead class="thead-light">
+      <tr>
+        <th>Catetegory</th>
+        <th>Date of booking</th>
+        <th>Seat Booked</th>
+        <th>Traveller name</th>
+        <th>Traveller surname</th>
+        <th>Manage Book</th>
+      </tr>
+    </thead>
+    <tr *ngFor="let bookedFlight of myBookings">
+      <td>{{bookedFlight.bookType}}</td>
+      <td>{{bookedFlight.bookDate}}</td> 
+      <td>{{bookedFlight.seat}}</td>
+      <td>{{bookedFlight.travellerName}}</td>
+      <td>{{bookedFlight.travellerSurname}}</td>
+      <td>
+        <button class="btn btn-outline-secondary" type="submit" (click)="cancelBooking(bookedFlight)">Cancel Booking</button>
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div>
+  <div *ngIf="bookStatus!=null">
+    <h3>New Booking Details</h3>
+    <div class="alert alert-info">
+      <strong>Note!</strong> Please check and click the below "Confirm Booking" button to confirm your booking..
+    </div>
+    <div>
+
+      <table class="table">
+        <thead class="thead-dark">
+          <tr>
+            <th>Flight name</th>
+            <th>Departure City</th>
+            <th>Departure Date</th>
+            <th>Departure Time</th>
+            <th>Arrival City</th>
+            <th>Arrival Date</th>
+            <th>Arrival Time</th>
+          </tr>
+        </thead>
+        <tr>
+          <td>{{selectedFlight.name}}</td>
+          <td>{{selectedFlight.departurecity}}</td>
+          <td>{{selectedFlight.departuredate}}</td>
+          <td>{{selectedFlight.departuretime}}</td>
+          <td>{{selectedFlight.arrivalcity}}</td>
+          <td>{{selectedFlight.arrivaldate}}</td>
+          <td>{{selectedFlight.arrivaltime}}</td>
+        </tr>
+      </table>
+      <div class="table-responsive">
+        <table class="table">
+          <tr>
+            <th>Number of Adults:</th>
+            <td>{{noOfAdults}}</td>
+          </tr>
+          <tr>
+            <th>Number of Children:</th>
+            <td>{{noOfChildren}}</td>
+          </tr>
+          <tr>
+            <th>Total Amount:</th>
+            <td>R {{selectedFlight.fareChild*noOfChildren+selectedFlight.fareAdult*noOfAdults}}</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+    <button class="btn btn-outline-secondary" type="submit">Confirm Booking</button>
+  </div>
+</div>

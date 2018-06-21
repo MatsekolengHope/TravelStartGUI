@@ -1,0 +1,132 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div role="navigation">
+        <div class="navbar navbar-inverse">
+            <a href="/" class="navbar-brand">Travelstart</a>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <button class="btn btn-link" id="Flights" href="#" (click)="tabFunction($event)">Flights</button>
+                    </li>
+                    <li class="nav-item">
+                        <button class="btn btn-link" id="Cars" href="#" (click)="tabFunction($event)">Cars</button>
+                    </li>
+                    <li class="nav-item">
+                        <button class="btn btn-link" id="Hotels" href="#" (click)="tabFunction($event)">Hotels</button>
+                    </li>
+                </ul>
+                <div class="navbar navbar-inverse">
+                    <a class="nav-link" routerLink="/sign-in">Login</a>
+                </div>
+                <div class="navbar navbar-inverse">
+                    <a class="nav-link" routerLink="/sign-up">New Registration</a>
+                    <br>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<br>
+
+<!--Home and Vissitor or Traveller flight search tab-->
+<div class="container" *ngIf="Flights!=null">
+    <div class="jumbotron text-center">
+        <h1>Search and Book Cheap Flights</h1>
+    </div>
+    <form class="form-horizontal" #searchFrom="ngForm" (ngSubmit)="onSubmit(searchFrom.value)">
+        <div class="input-group mb-3">
+            <input type="text" name="departurecity" class="form-control" list="departurecities" placeholder="Enter deparure city" ngModel>
+            <input type="text" name="arrivalcity" class="form-control" list="arrivalcities" placeholder="Enter destination city" ngModel>
+            <datalist id="departurecities">
+                <option *ngFor="let flight of flights" [ngValue]="flight">{{flight.departurecity}}</option>
+            </datalist>
+            <datalist id="arrivalcities">
+                <option *ngFor="let flight of flights" [ngValue]="flight">{{flight.arrivalcity}}</option>
+            </datalist>
+            <input type="date" name="depatureDate" placeholder="Date of deparure" class="textbox-n" type="text" onfocus="(this.type='date')" class="form-control">
+        </div>
+        <label>
+            <input type="checkbox" (change)="ifOtherTravellers" #ifOtherTravellers> Additional travellers?
+        </label>
+        <div *ngIf="ifOtherTravellers.checked">
+            <h3>Additional travellers:</h3>
+            <div>Adults:
+                <br>
+                <input type="number" name="noOfAdults" ngModel>
+            </div>
+            <div>Children:
+                <br>
+                <input type="number" name="noOfChildren" ngModel>
+            </div>
+        </div>
+        <br>
+        <div class="input-group-append">
+            <button class="btn btn-outline-secondary" type="submit">Search</button>
+        </div>
+    </form>
+    <br>
+    <div class="img-thumbnail">
+        <img src="{{imageSource}}" alt="" width="1100" height="500">
+    </div>
+
+</div>
+
+<!--Vissitor or Traveller Cars search tab-->
+<div class="container" *ngIf="Cars!=null">
+    <div class="jumbotron text-center">
+        <h3>Car Hire</h3>
+    </div>
+    <form class="form-horizontal" #searchForm="ngForm" (ngSubmit)="searchCar(searchForm.value)">
+        <div class="input-group mb-3">
+            <div>Pick-up Location
+                <input type="text" name="pickUpLocation" class="form-control" placeholder="Pick-up Location" ngModel> Drop-off Location
+                <input type="text" name="dropOffLocation" class="form-control" placeholder="Drop-off Location" ngModel>
+            </div>
+            <div>Pick-up Date
+                <input type="date" name="pickUpDate" class="form-control" ngModel>Drop-off Date
+                <input type="date" name="dropOffDate" class="form-control" ngModel>
+            </div>
+            <div>Pick-up Time
+                <input type="time" name="pickUpTime" class="form-control" ngModel>Drop-off Time
+                <input type="time" name="dropOffTime" class="form-control" ngModel>
+            </div>
+        </div>
+        <div class="input-group-append">
+            <button class="btn btn-outline-secondary" type="submit">Search</button>
+        </div>
+    </form>
+    <br>
+    <div class="img-thumbnail">
+        <img src="{{carImage}}" alt="" width="1100" height="500">
+    </div>
+</div>
+
+<!--Vissitor or Traveller Hotels search tab-->
+<div class="container" *ngIf="Hotels!=null">
+    <div class="jumbotron text-center">
+        <h1>Hotel search</h1>
+    </div>
+    <form class="form-horizontal" #searchFrom="ngForm" (ngSubmit)="searchHotel(searchFrom.value)">
+        <div>
+            <div>
+                <input type="text" name="location" class="form-control" placeholder="Enter your destination city here" ngModel>
+            </div>
+            <br>
+            <br>
+            <div>
+                <b>Check in date</b>
+                <input type="date" name="checkInDate" class="form-control" ngModel>
+                <b>Check out date</b>
+                <input type="date" name="checkOutDate" class="form-control" ngModel>
+            </div>
+        </div>
+        <br>
+        <div class="input-group-append">
+            <button class="btn btn-outline-secondary" type="submit">Search</button>
+        </div>
+    </form>
+    <br>
+    <div class="img-thumbnail">
+        <img src="{{hotelImage}}" alt="" width="1100" height="500">
+    </div>
+</div>

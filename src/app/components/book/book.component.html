@@ -1,0 +1,191 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div role="navigation">
+    <div class="navbar navbar-inverse">
+      <a href="/" class="navbar-brand">Travelstart</a>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="#">Flights</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Hotels</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href=#>Cars</a>
+          </li>
+        </ul>
+        <div class="navbar navbar-inverse">
+          <a class="nav-link" routerLink="/sign-in">Login</a>
+        </div>
+        <div class="navbar navbar-inverse">
+          <a class="nav-link" routerLink="/sign-up">New Registration</a>
+          <br>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
+<div id="content" #content class="container">
+<h3>Booking Summary</h3>
+<div *ngIf="selectedFlight!=null">
+  <div>
+    <div class="alert alert-info">
+      <strong>Note!</strong> Please check and click the below "Confirm Booking" button to confirm your booking..
+    </div>
+
+    <h3>Traveller Details (Adult)</h3>
+    <table class="table table-sm">
+      <tr>
+        <th>Title:</th>
+        <td>{{u.title}}</td>
+      </tr>
+      <tr>
+        <th>Last name:</th>
+        <td>{{u.lastname}}</td>
+      </tr>
+      <tr>
+        <th>First Names:</th>
+        <td>{{u.firstname}}</td>
+      </tr>
+    </table>
+    <div>
+      <div>Available tickets: </div>
+      <table class="table table-sm">
+        <thead class="thead-dark">
+          <tr>
+            <th>Flight name</th>
+            <th>Ticket-#</th>
+            <th>Departure City</th>
+            <th>Departure Date</th>
+            <th>Departure Time</th>
+            <th>Arrival City</th>
+            <th>Arrival Date</th>
+            <th>Arrival Time</th>
+          </tr>
+        </thead>
+        <tr>
+          <td>{{selectedFlight.name}}</td>
+          <td>{{seat}}</td>
+          <td>{{selectedFlight.departurecity}}</td>
+          <td>{{selectedFlight.departuredate}}</td>
+          <td>{{selectedFlight.departuretime}}</td>
+          <td>{{selectedFlight.arrivalcity}}</td>
+          <td>{{selectedFlight.arrivaldate}}</td>
+          <td>{{selectedFlight.arrivaltime}}</td>
+        </tr>
+      </table>
+      <table class="table table-sm">
+        <tr>
+          <th>Number of Adults:</th>
+          <td>{{noOfAdults}}</td>
+        </tr>
+        <tr>
+          <th>Number of Children:</th>
+          <td>{{noOfChildren}}</td>
+        </tr>
+        <tr>
+          <th>Amount:</th>
+          <td>R {{cost}}</td>
+        </tr>
+        <tr>
+          <th>Total Amount:</th>
+          <td>R {{totalAmount}}</td>
+        </tr>
+      </table>
+    </div>
+
+    <div *ngIf="additionalTravellers.length!=0">
+      <div>
+        <h3>Other traveller(s) details:</h3>
+        <table class="table table-sm">
+          <div *ngFor="let traveller of additionalTravellers">
+            <tr>
+              <th>Title:</th>
+              <td>{{traveller.title}}</td>
+            </tr>
+            <tr>
+              <th>Last name:</th>
+              <td>{{traveller.name}}</td>
+            </tr>
+            <tr>
+              <th>First Names:</th>
+              <td>{{traveller.surname}}</td>
+            </tr>
+            <tr>
+              <th>Seat:</th>
+              <td>{{traveller.seat}}</td>
+            </tr>
+          </div>
+        </table>
+      </div>
+    </div>
+
+    <div *ngIf="loop!=0">
+      <h3>Other traveller(s)</h3>
+      <h3>Traveller {{additionalTravellers.length + 1}} Details:</h3>
+      <form class="form-horizontal" #travellerForm="ngForm">
+        <div>Title:
+          <br>
+          <input type="text" name="title" ngModel>
+        </div>
+        <div>Name:
+          <br>
+          <input type="text" name="name" ngModel>
+        </div>
+        <div>Surname:
+          <br>
+          <input type="text" name="surname" ngModel>
+        </div>
+        <div>Cell no:
+          <br>
+          <input type="text" name="cellno" ngModel>
+        </div>
+        <div>Address:
+          <br>
+          <input type="text" name="address" ngModel>
+        </div>
+        <div>Age:
+          <br>
+          <input type="text" name="age" ngModel>
+        </div>
+        <br>
+        <br>
+        <button class="btn btn-outline-secondary" type="submit" (click)="saveAddtionalTraveller(travellerForm.value); travellerForm.reset()">Submit</button>
+      </form>
+      <br>
+    </div>
+    <label>
+      <input type="checkbox" (change)="makePayment" #makePayment> Make payment
+    </label>
+    <div *ngIf="loop==0 || makePayment.checked">
+      <h3>Payment Details</h3>
+      <form class="form-horizontal" #userFrom="ngForm" (ngSubmit)="onSubmit(userFrom.value)">
+        <div class="form group">
+          <input type="hidden" name="id" class="form-control" ngModel>
+        </div>
+        <div class="form group">
+          <label>Card number
+            <input type="number" name="cardNumber" class="form-control" ngModel>
+          </label>
+        </div>
+        <div class="form group">
+          <label>Account pin
+            <input type="password" name="pin" class="form-control" ngModel>
+          </label>
+        </div>
+        <div class="form group">
+          <label>Expiry date
+            <input type="date" name="expiryDate" class="form-control" ngModel>
+          </label>
+        </div>
+        <br>
+        <button class="btn btn-outline-secondary" type="submit">Confirm Booking</button>
+      </form>
+    </div>
+  </div>
+  <div>
+    <input type="submit" (click)="downloadPDF()" value="Download">
+    <input type="submit" (click)="sendEmail()" value="Send Email">
+  </div>
+</div>
+</div>

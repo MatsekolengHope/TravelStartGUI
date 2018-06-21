@@ -1,0 +1,149 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div role="navigation">
+    <div class="navbar navbar-inverse">
+      <a href="/" class="navbar-brand">Travelstart</a>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="#">Flights</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Hotels</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href=#>Cars</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/list-users">Users</a>
+          </li>
+
+        </ul>
+        <div class="navbar navbar-inverse">
+          <a class="nav-link" routerLink="">Sign-out</a>
+        </div>
+        <div class="navbar navbar-inverse">
+            <button class="btn btn-link" id="Hotels" href="#" (click)="tabFunction($event)">{{u.firstname}}</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
+<div>
+  <div>
+    <h3 style="text-align: center">Booking Summary (Car Hire)</h3>
+  </div>
+  <p style="text-align: center">
+    <b>{{selectedCar.name}}</b>
+  </p>
+</div>
+<div>
+    <table class="table table-hover table-bordered table-striped table-sm">
+        <tr>
+          <th>Pick-up location</th>
+          <td>{{pickUpLocation}}</td>
+        </tr>
+        <tr>
+          <th>Pick-up Date</th>
+          <td>{{pickUpDate}}</td>
+        </tr>
+        <tr>
+          <th>Pick-up Time</th>
+          <td>{{pickUpTime}}</td>
+        </tr>
+        <tr>
+          <th>Drop-off location</th>
+          <td>{{dropOffLocation}}</td>
+        </tr>
+        <tr>
+          <th>Drop-off Date</th>
+          <td>{{dropOffDate}}</td>
+        </tr>
+        <tr>
+          <th>Drop-off Time</th>
+          <td>{{dropOffTime}}</td>
+        </tr>
+      </table>
+</div>
+
+<div>
+  <table class="table table-hover table-bordered table-striped table-sm">
+    <tr>
+      <th>Property name</th>
+      <td>{{selectedCar.name}}</td>
+    </tr>
+    <tr>
+      <th>Model of a car</th>
+      <td>{{selectedCar.model}}</td>
+    </tr>
+    <tr>
+      <th>Cost</th>
+      <td>R {{selectedCar.cost}}</td>
+    </tr>
+    <tr>
+      <th>Laggage:</th>
+      <td>{{selectedCar.lagage_bags}} bags</td>
+    </tr>
+    <tr>
+      <th>Capacity-#</th>
+      <td>{{selectedCar.capacity}}</td>
+    </tr>
+    <tr>
+      <th>Fuel Policy</th>
+      <td>{{selectedCar.fuelPolicy}}</td>
+    </tr>
+  </table>
+</div>
+
+<div>
+  <h3>Applicant's Personal Details:</h3>
+  <table class="table table-sm">
+    <tr>
+      <th>Title:</th>
+      <td>{{u.title}}</td>
+    </tr>
+    <tr>
+      <th>Last name:</th>
+      <td>{{u.lastname}}</td>
+    </tr>
+    <tr>
+      <th>First Names:</th>
+      <td>{{u.firstname}}</td>
+    </tr>
+  </table>
+</div>
+
+<div>
+  <h3>Applicant's Payment Details:</h3>
+  <form class="form-horizontal" #userFrom="ngForm" (ngSubmit)="onSubmit(userFrom.value)">
+    <div class="form group">
+      <input type="hidden" name="id" class="form-control" ngModel>
+    </div>
+    <div class="form group">
+      <label>Card number
+        <input type="number" name="cardNumber" class="form-control" ngModel>
+      </label>
+    </div>
+    <div class="form group">
+      <label>Account holder<br>
+          <b>{{u.firstname}} {{u.lastname}}</b>
+      </label>
+    </div>
+    <div class="form group">
+      <label>Account pin
+        <input type="text" name="accountPin" class="form-control" ngModel>
+      </label>
+    </div>
+    <div class="form group">
+      <label>Expiry date
+        <input type="date" name="expiryDate" class="form-control" ngModel>
+      </label>
+    </div>
+    <div class="form group">
+      <label>Total amount
+        <input type="text" name="totalAmount" class="form-control" ngModel>
+      </label>
+    </div>
+    <br>
+    <button class="btn btn-outline-secondary" type="submit">Confirm Booking</button>
+  </form>
+</div>

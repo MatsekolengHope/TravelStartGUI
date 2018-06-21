@@ -1,0 +1,130 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div role="navigation">
+        <div class="navbar navbar-inverse">
+            <a href="/" class="navbar-brand">Travelstart</a>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Flights</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Hotels</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href=#>Cars</a>
+                    </li>
+                </ul>
+                <div class="navbar navbar-inverse">
+                    <a class="nav-link" routerLink="/sign-in">Login</a>
+                </div>
+                <div class="navbar navbar-inverse">
+                    <a class="nav-link" routerLink="/sign-up">New Registration</a>
+                    <br>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<div class="container" id="Home">
+    <div class="jumbotron text-center">
+        <h1>Searched Flights</h1>
+    </div>
+    <div *ngIf="searchedFlights.length > 0">
+        <label>
+            <input type="checkbox" (change)="ifOtherTravellers" #ifOtherTravellers> Additional travellers?
+        </label>
+        <form class="form-horizontal" #searchFrom="ngForm" (ngSubmit)="onSubmit(searchFrom.value)">
+                <div class="input-group mb-3">
+                    <input type="text" name="departurecity" class="form-control" list="departurecities" placeholder="Enter deparure city" ngModel>
+                    <input type="text" name="arrivalcity" class="form-control" list="arrivalcities" placeholder="Enter destination city" ngModel>
+                    <datalist id="departurecities">
+                        <option *ngFor="let flight of flights" [ngValue]="flight">{{flight.departurecity}}</option>
+                    </datalist>
+                    <datalist id="arrivalcities">
+                        <option *ngFor="let flight of flights" [ngValue]="flight">{{flight.arrivalcity}}</option>
+                    </datalist>
+                    <input type="date" name="depatureDate" placeholder="Date of deparure" class="textbox-n" type="text" onfocus="(this.type='date')" class="form-control">
+                </div>
+                <div *ngIf="ifOtherTravellers.checked">
+                    <h3>Additional travellers:</h3>
+                    <div>Adults:
+                        <br>
+                        <input type="number" name="noOfAdults" ngModel>
+                    </div>
+                    <div>Children:
+                        <br>
+                        <input type="number" name="noOfChildren" ngModel>
+                    </div>
+                </div>
+                <br>
+                <div class="input-group-append">
+                    <button class="btn btn-outline-secondary" type="submit">Search</button>
+                </div>
+                <br>
+            </form>
+        <table class="table table-hover table-sm">
+            <thead class="thead-light">
+                <tr>
+                    <th>Departure City</th>
+                    <th>Departure Date</th>
+                    <th>Departure Time</th>
+                    <th>Arrival City</th>
+                    <th>Arrival Date</th>
+                    <th>Arrival Time</th>
+                    <th>Book</th>
+                </tr>
+            </thead>
+            <tr *ngFor="let searchedFlight of searchedFlights">
+                <td>{{searchedFlight.departurecity}}</td>
+                <td>{{searchedFlight.departuredate}}</td>
+                <td>{{searchedFlight.departuretime}}</td>
+                <td>{{searchedFlight.arrivalcity}}</td>
+                <td>{{searchedFlight.arrivaldate}}</td>
+                <td>{{searchedFlight.arrivaltime}}</td>
+                <td>
+                    <button class="btn btn-link" id="Cars" href="#" (click)="selectedFlightFunction(searchedFlight)">Select</button>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div *ngIf="searchedFlights.length == 0">
+        <h3>Sorry, no available flights match your search! Please try again.</h3>
+        <div class="alert alert-info">
+            <strong>NB!</strong> This may be because the flight you are trying to search is fully booked.
+        </div>
+        <label>
+            <input type="checkbox" (change)="ifOtherTravellers" #ifOtherTravellers> Additional travellers?
+        </label>
+        <form class="form-horizontal" #searchFrom="ngForm" (ngSubmit)="onSubmit(searchFrom.value)">
+                <div class="input-group mb-3">
+                    <input type="text" name="departurecity" class="form-control" list="departurecities" placeholder="Enter deparure city" ngModel>
+                    <input type="text" name="arrivalcity" class="form-control" list="arrivalcities" placeholder="Enter destination city" ngModel>
+                    <datalist id="departurecities">
+                        <option *ngFor="let flight of flights" [ngValue]="flight">{{flight.departurecity}}</option>
+                    </datalist>
+                    <datalist id="arrivalcities">
+                        <option *ngFor="let flight of flights" [ngValue]="flight">{{flight.arrivalcity}}</option>
+                    </datalist>
+                </div>
+                <label>
+                    <input type="checkbox" (change)="ifOtherTravellers" #ifOtherTravellers> Additional travellers?
+                </label>
+                <div *ngIf="ifOtherTravellers.checked">
+                    <h3>Additional travellers:</h3>
+                    <div>Adults:
+                        <br>
+                        <input type="number" name="noOfAdults" ngModel>
+                    </div>
+                    <div>Children:
+                        <br>
+                        <input type="number" name="noOfChildren" ngModel>
+                    </div>
+                </div>
+                <br>
+                <div class="input-group-append">
+                    <button class="btn btn-outline-secondary" type="submit">Search</button>
+                </div>
+            </form>
+    </div>
+</div>

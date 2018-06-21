@@ -1,0 +1,95 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div role="navigation">
+    <div class="navbar navbar-inverse">
+      <a href="/" class="navbar-brand">Travelstart</a>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="#">Flights</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Hotels</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href=#>Cars</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/list-users">Users</a>
+          </li>
+
+        </ul>
+        <div class="navbar navbar-inverse">
+          <a class="nav-link" routerLink="/sign-in">Login</a>
+        </div>
+        <div class="navbar navbar-inverse">
+          <a class="nav-link" routerLink="/sign-up">New Registration</a>
+          <br>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<div class="container" id="Home">
+  <div class="jumbotron text-center">
+    <h1>Searched Hotels</h1>
+  </div>
+
+  <div *ngIf="searchedHotels.length == 0">
+    <h3>No hotels match your search, please try again.</h3>
+  </div>
+
+  <form class="form-horizontal" #searchFrom="ngForm" (ngSubmit)="searchHotel(searchFrom.value)">
+    <div>
+      <div>
+        <input type="text" name="location" class="form-control" placeholder="Enter your destination city here" ngModel>
+      </div>
+      <br>
+      <br>
+      <div>
+        <b>Check in date</b>
+        <input type="date" name="checkInDate" class="form-control" ngModel>
+        <b>Check out date</b>
+        <input type="date" name="checkOutDate" class="form-control" ngModel>
+      </div>
+      <div>
+        <b>Rooms</b>
+        <input type="text" name="roomType" class="form-control" ngModel>
+      </div>
+    </div>
+    <br>
+    <div class="input-group-append">
+      <button class="btn btn-outline-secondary" type="submit">Search</button>
+    </div>
+  </form>
+  <br>
+  <div *ngIf="searchedHotels.length > 0">
+    <h3>Your search matches the following Hotel(s)</h3>
+    <table class="table table-hover table-striped table-sm">
+      <thead class="thead-light">
+        <tr>
+          <th>Property Name</th>
+          <th>Bathrooms</th>
+          <th>Bedrooms</th>
+          <th>Kitchens</th>
+          <th>Fare Child</th>
+          <th>Fare Adult</th>
+          <th>Location</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tr *ngFor="let searchedHotel of searchedHotels">
+        <td>{{searchedHotel.name}}</td>
+        <td>{{searchedHotel.bathRooms}}</td>
+        <td>{{searchedHotel.bedRooms}}</td>
+        <td>{{searchedHotel.kitchens}}</td>
+        <td>R {{searchedHotel.costChild}}</td>
+        <td>R {{searchedHotel.costAdult}}</td>
+        <td>{{searchedHotel.location}}</td>
+        <td>
+          <button class="btn btn-link" id="Hotels" href="#" (click)="selectHotel(searchedHotel)">Select</button>
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>
