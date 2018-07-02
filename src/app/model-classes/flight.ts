@@ -1,10 +1,10 @@
 export class Flight {
     id: number;
     name: string;
-    departuredate: Date;
+    departuredate: string;
     departurecity: string;
     departuretime: string;
-    arrivaldate: Date;
+    arrivaldate: string;
     arrivalcity: string;
     arrivaltime: string;
     capacity: number;

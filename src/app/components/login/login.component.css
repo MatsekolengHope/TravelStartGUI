@@ -1,0 +1,29 @@
+.background-red{
+    background-color: rgb(153, 50, 50);
+  }
+  .background-green{
+    background-color: rgb(29, 102, 29);
+  }
+
+  .success-snackbar{
+    background-color: #FFF;
+    color: #AAA;
+}
+
+  /*openSnackBar(message, type) {
+    let extraClasses;
+    if (type == 'error') {
+      extraClasses = ['background-red'];
+    } else {
+      extraClasses = ['background-green'];
+  }
+ 
+  this.snackBar.openFromComponent(SnackBarTemplateComponent, {
+    duration: 30000,
+    extraClasses: extraClasses,
+    data: {
+      message: message,
+      type:type
+    }
+  });
+ }*/

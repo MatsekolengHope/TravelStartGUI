@@ -1,27 +1,80 @@
 <div *ngIf="myBookings!==null">
-  <h3>My bookings</h3>
+  <h3>My flight bookings</h3>
   <table class="table table-hover table-sm">
     <thead class="thead-light">
       <tr>
-        <th>Catetegory</th>
-        <th>Date of booking</th>
-        <th>Seat Booked</th>
+        <th>Flight name</th>
         <th>Traveller name</th>
         <th>Traveller surname</th>
-        <th>Manage Book</th>
+        <th>Departure City</th> 
+        <th>Departure Time</th>
+        <th>Arrival City</th>
+        <th>Arrival Time</th>
+        <th>Seat booked</th>
+        <th>Download Ticket</th>
+        <th>Cancel Booking</th>
       </tr>
     </thead>
-    <tr *ngFor="let bookedFlight of myBookings">
-      <td>{{bookedFlight.bookType}}</td>
-      <td>{{bookedFlight.bookDate}}</td> 
-      <td>{{bookedFlight.seat}}</td>
-      <td>{{bookedFlight.travellerName}}</td>
-      <td>{{bookedFlight.travellerSurname}}</td>
+    <tr *ngFor="let ticket of flightTickets">
+      <td>{{ticket.flightName}}</td>
+      <td>{{ticket.travellerName}}</td> 
+      <td>{{ticket.travellerSurname}}</td>
+      <td>{{ticket.departureCity}}</td>
+      <td>{{ticket.departureTime}}</td>
+      <td>{{ticket.arrivalCity}}</td>
+      <td>{{ticket.travellerSurname}}</td>
+      <td>{{ticket.seat}}</td>
+      <td><button class="btn btn-outline-secondary" type="submit" (click)="viewTicket(ticket)">View Ticket</button></td>
       <td>
-        <button class="btn btn-outline-secondary" type="submit" (click)="cancelBooking(bookedFlight)">Cancel Booking</button>
+        <button class="btn btn-danger" type="submit" (click)="cancelBooking(ticket)">Cancel Booking</button>
       </td>
     </tr>
   </table>
+  <div *ngIf="displayTicket==true">
+      <div id="content" #content>
+          <div style="border: solid; width: 1000px; height: 400px; background: lightskyblue">
+              <label>
+                  <img src="{{imageSource}}" alt="" width="100" height="60">
+              </label>
+              <h3 style="text-align: center">Travelstart Traveller Ticket</h3>
+              <b>Date of Departure: {{ticket.departureDate}}</b>
+              <br/>
+              <div style="background: lavender">
+                  <div>
+                      <b>Flight name: </b>
+                      <label style="border: solid; width: 200px; height: 30px; background: ivory">{{ticket.flightName}}</label>
+                  </div>
+                  <div>
+                      <b>Seat: </b>
+                      <label style="border: solid; width: 200px; height: 30px; background: ivory">{{ticket.seat}}</label>
+                  </div>
+                  <div>
+                      <b>Traveller name: </b>
+                      <label style="border: solid; width: 200px; height: 30px; background: ivory">{{ticket.travellerName}}</label>
+                      <b>Traveller surname: </b>
+                      <label style="border: solid; width: 200px; height: 30px; background: ivory">{{ticket.travellerSurname}}</label>
+                  </div>
+                  <div>
+                      <b>Departure city: </b>
+                      <label style="border: solid; width: 200px; height: 30px; background: ivory">{{ticket.departureCity}}</label>
+                      <b>Departure time: </b>
+                      <label style="border: solid; width: 200px; height: 30px; background: ivory">{{ticket.departureTime}}</label>
+                  </div>
+                  <div>
+                      <b>Arrival city: </b>
+                      <label style="border: solid; width: 200px; height: 30px; background: ivory">{{ticket.arrivalCity}}</label>
+                      <b>Arrival time: </b>
+                      <label style="border: solid; width: 200px; height: 30px; background: ivory">{{ticket.arrivalTime}}</label>
+                  </div>
+              </div>
+          </div>
+      </div>
+      <br>
+      <div>
+          <button class="btn btn-outline-secondary" (click)="downloadTicket()">Download Ticket</button>
+          <button class="btn btn-outline-secondary" (click)="close()">Close</button>
+      </div>
+  </div>
 </div>
 
 <div>

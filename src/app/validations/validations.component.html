@@ -1,0 +1,39 @@
+<div id="content" #content>
+    <div style="border: solid; width: 1000px; height: 400px; background: lightskyblue">
+        <label>
+            <img src="{{imageSource}}" alt="" width="80" height="60">
+        </label>
+        <h3 style="text-align: center">Travelstart Traveller Ticket</h3>
+        <b>Date of Departure: {{ticket.departureDate}}</b>
+        <br/>
+        <div style="background: lavender">
+            <div>
+                <b>Flight name: </b>
+                <label style="border: solid; width: 200px; height: 30px; background: ivory">{{ticket.flightName}}</label>
+            </div>
+            <div>
+                <b>Seat: </b>
+                <label style="border: solid; width: 200px; height: 30px; background: ivory">{{ticket.seat}}</label>
+            </div>
+            <div>
+                <b>Traveller name: </b>
+                <label style="border: solid; width: 200px; height: 30px; background: ivory">{{ticket.travellerName}}</label>
+                <b>Traveller surname: </b>
+                <label style="border: solid; width: 200px; height: 30px; background: ivory">{{ticket.travellerSurname}}</label>
+            </div>
+            <div>
+                <b>Departure city: </b>
+                <label style="border: solid; width: 200px; height: 30px; background: ivory">{{ticket.departureCity}}</label>
+                <b>Departure time: </b>
+                <label style="border: solid; width: 200px; height: 30px; background: ivory">{{ticket.departureTime}}</label>
+            </div>
+            <div>
+                <b>Arrival city: </b>
+                <label style="border: solid; width: 200px; height: 30px; background: ivory">{{ticket.arrivalCity}}</label>
+                <b>Arrival time: </b>
+                <label style="border: solid; width: 200px; height: 30px; background: ivory">{{ticket.arrivalTime}}</label>
+            </div>
+        </div>
+    </div>
+</div>
+<button type="button" id="cmd" class="btn btn-primary" (click)="captureScreenshot(); download()">Print Ticket</button>

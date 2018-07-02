@@ -5,6 +5,9 @@ import { BookService } from '../../shared-service/book.service';
 import { User } from '../../model-classes/user';
 import { Flight } from '../../model-classes/flight';
 import { BookFlight } from '../../model-classes/book-flight';
+import { FlightTicket } from '../../model-classes/flight-ticket';
+import { Address } from '../../model-classes/address';
+import { MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'app-userprofile',
@@ -20,26 +23,37 @@ export class UserprofileComponent implements OnInit {
   private noOfChildren: number;
   private myBookings: BookFlight[];
 
-  constructor(private _userService: UserService, private _router: Router, private _bookService: BookService) { }
+  private flightTickets: FlightTicket[];
+  private addresses: Address[];
+
+  constructor(private _userService: UserService, private _router: Router, private _bookService: BookService,
+    private _matSnackBar: MatSnackBar) { }
 
   ngOnInit() {
+
+    this._matSnackBar.open('You have successfully registered', 'Ok', {
+      duration: 10000,
+      verticalPosition: 'top'
+    });
+
     this.user = this._userService.getter();
     this.u = new User();
     this.displayUser();
     this.displayFlight();
+
+    this.flightTickets = this.u.flightTickets;
+    this.addresses = this.u.addresses; 
     
     console.log(this.u);
+    console.log(this.addresses);
+    console.log(this.flightTickets);
+
+    localStorage.setItem('flightTickets', JSON.stringify(this.flightTickets));
+
     this.bookStatus = JSON.parse(localStorage.getItem('bookStatus'));
     this.noOfChildren = JSON.parse(localStorage.getItem('noOfChildren'));
     this.noOfAdults = JSON.parse(localStorage.getItem('noOfAdults')); 
     
-    this._bookService.myBookings(this.u.id).subscribe((myBookings) => {
-      this.myBookings = myBookings;
-      //localStorage.setItem('myBookings', JSON.stringify(myBookings));
-      console.log(this.myBookings);
-    }, (error) => {
-      console.log(error);
-    });
   }
 
  
@@ -66,7 +80,7 @@ export class UserprofileComponent implements OnInit {
   }
 
   confirmBooking(){
-
+ 
   }
 
   

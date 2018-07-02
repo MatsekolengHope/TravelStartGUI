@@ -4,6 +4,9 @@ import { RouterModule, Routes } from '@angular/router';
 import { UserService } from './shared-service/user.service';
 import { HttpModule } from '@angular/http';
 import { FormsModule } from '@angular/forms';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import {MatButtonModule} from '@angular/material';
+
 
 import { AppComponent } from './app.component';
 import { UserFormComponent } from './components/user-form/user-form.component';
@@ -17,7 +20,6 @@ import { FlightService } from './shared-service/flight.service';
 import { SearchedFlightsComponent } from './components/searched-flights/searched-flights.component';
 import { BookComponent } from './components/book/book.component';
 import { BookService } from './shared-service/book.service';
-import { TabsComponent } from './components/tabs/tabs.component';
 import { CarService } from './shared-service/car.service';
 import { HotelService } from './shared-service/hotel.service';
 import { SearchedCarsComponent } from './components/searched-cars/searched-cars.component';
@@ -34,6 +36,10 @@ import { AdditionalTravellersService } from './shared-service/additional-travell
 import { OtherTravelerComponent } from './components/book/other-traveler/other-traveler.component';
 import { TravellerAddressService } from './shared-service/traveller-address.service';
 import { FlightTicketService } from './shared-service/flight-ticket.service';
+import { ValidationsComponent } from './validations/validations.component';
+
+import { CommonModule } from '@angular/common';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent },
@@ -46,7 +52,7 @@ const appRoutes: Routes = [
   { path: 'admin-profile', component: AdminprofileComponent },
   { path: 'searched-flights', component: SearchedFlightsComponent },
   { path: 'book', component: BookComponent },
-  { path: 'tabs', component: TabsComponent },
+  { path: 'val', component: ValidationsComponent },
   { path: 'searched-cars', component: SearchedCarsComponent }, 
   { path: 'searched-hotels', component: SearchedHotelsComponent },
   { path: 'car-admin-profile', component: CarAdminProfileComponent },
@@ -69,7 +75,7 @@ const appRoutes: Routes = [
     AdminprofileComponent,
     SearchedFlightsComponent,
     BookComponent,
-    TabsComponent,
+    ValidationsComponent,
     SearchedCarsComponent,
     SearchedHotelsComponent,
     HotelAdminProfileComponent,
@@ -78,13 +84,22 @@ const appRoutes: Routes = [
     SelectedCarComponent,
     SelectedHotelComponent,
     ListHotelsComponent,
-    OtherTravelerComponent
+    OtherTravelerComponent,
+    ValidationsComponent
+
+
   ],
   imports: [
     BrowserModule,
     HttpModule,
     FormsModule,
-    RouterModule.forRoot(appRoutes)
+    RouterModule.forRoot(appRoutes),
+    CommonModule,
+    BrowserAnimationsModule,
+    MatSnackBarModule,
+    MatButtonModule
+
+
   ],
   providers: [UserService, FlightService, BookService, CarService, HotelService, PaymentService, 
     AdditionalTravellersService, TravellerAddressService, FlightTicketService],

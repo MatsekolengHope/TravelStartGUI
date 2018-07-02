@@ -12,6 +12,7 @@ import { NgForm } from '@angular/forms';
 
 import * as jsPDF from 'jspdf';
 import { Email } from '../../class/email';
+import { FlightTicket } from '../../model-classes/flight-ticket';
 
 @Component({
   selector: 'app-book',
@@ -22,7 +23,7 @@ export class BookComponent implements OnInit {
 
   private u: User = JSON.parse(localStorage.getItem('user'));
   private selectedFlight: Flight = JSON.parse(localStorage.getItem('selectedFlight'));
-  private bookFlight: BookFlight = new BookFlight();
+  private flightTicket: FlightTicket = new FlightTicket();
 
   private loop: number = JSON.parse(sessionStorage.getItem('loop'));
   private form: number = JSON.parse(sessionStorage.getItem('form'));
@@ -84,20 +85,27 @@ export class BookComponent implements OnInit {
     this.payment.totalAmount = this.totalAmount;
     this.payment.pin = payment.pin;
 
-    this.bookFlight.travellerId = this.u.id;
-    this.bookFlight.flightId = this.selectedFlight.id;
-    this.bookFlight.bookDate = new Date;
-    this.bookFlight.seat = this.seat;
-    this.bookFlight.travellerName = this.u.firstname;
-    this.bookFlight.travellerSurname = this.u.lastname;
-    console.log('Next Seat: ' + this.bookFlight.seat);
+    this.flightTicket.flightId = this.selectedFlight.id;
+    this.flightTicket.flightName = this.selectedFlight.name;
+    this.flightTicket.seat = this.seat;
+    this.flightTicket.travellerName = this.u.firstname;
+    this.flightTicket.travellerSurname = this.u.lastname;
+    this.flightTicket.departureCity = this.selectedFlight.departurecity;
+    this.flightTicket.arrivalCity = this.selectedFlight.arrivalcity;
+    this.flightTicket.arrivalTime = this.selectedFlight.arrivaltime;
+    this.flightTicket.departureTime = this.selectedFlight.departuretime;
+    this.flightTicket.departureDate = this.selectedFlight.departuredate;
+    this.flightTicket.arrivalTime = this.selectedFlight.arrivaltime;
+    this.flightTicket.travellerId = this.u.id;
+
+    console.log('Next Seat: ' + this.flightTicket.seat);
 
     this._paymentService.createPayment(this.payment).subscribe((payment) => {
     }, (error) => {
       console.log(error);
     });
 
-    this._bookService.createFlightBook(this.bookFlight).subscribe((bookFlight) => {
+    this._bookService.createFlightTicket(this.flightTicket).subscribe((flightTicket) => {
     }, (error) => {
       console.log(error);
     });
@@ -144,13 +152,18 @@ export class BookComponent implements OnInit {
       console.log(error);
     });
 
-
-    this.bookFlight.travellerId = this.u.id;
-    this.bookFlight.flightId = this.selectedFlight.id;
-    this.bookFlight.bookDate = new Date;
-    this.bookFlight.seat = this.seat;
-    this.bookFlight.travellerName = traveller.name;
-    this.bookFlight.travellerSurname = traveller.surname;
+    this.flightTicket.flightId = this.selectedFlight.id;
+    this.flightTicket.flightName = this.selectedFlight.name;
+    this.flightTicket.seat = this.seat;
+    this.flightTicket.travellerName = this.u.firstname;
+    this.flightTicket.travellerSurname = this.u.lastname;
+    this.flightTicket.departureCity = this.selectedFlight.departurecity;
+    this.flightTicket.arrivalCity = this.selectedFlight.arrivalcity;
+    this.flightTicket.arrivalTime = this.selectedFlight.arrivaltime;
+    this.flightTicket.departureTime = this.selectedFlight.departuretime;
+    this.flightTicket.departureDate = this.selectedFlight.departuredate;
+    this.flightTicket.arrivalTime = this.selectedFlight.arrivaltime;
+    this.flightTicket.travellerId = this.u.id;
 
     if (traveller.age < 12) {
       this.totalAmount = this.totalAmount + this.selectedFlight.fareChild;
@@ -165,6 +178,7 @@ export class BookComponent implements OnInit {
 
     this.additionalTravellers.push(this.additionalTraveller);
     console.log(this.loop);
+    console.log(this.flightTicket);
 
     console.log('Length: ' + this.additionalTravellers.length);
 
@@ -187,7 +201,7 @@ export class BookComponent implements OnInit {
 
     console.log(this.bodyMessage);
 
-    this._bookService.createFlightBook(this.bookFlight).subscribe((bookFlight) => {
+    this._bookService.createFlightTicket(this.flightTicket).subscribe((bookFlight) => {
     }, (error) => {
       console.log(error);
     });

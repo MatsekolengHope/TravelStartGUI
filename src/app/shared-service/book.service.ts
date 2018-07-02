@@ -5,10 +5,10 @@ import { Observable } from 'rxjs/observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';
-import { BookFlight } from '../model-classes/book-flight';
 import { CarBook } from '../model-classes/car-book';
 import { BookHotel } from '../model-classes/book-hotel';
 import { Email } from '../class/email';
+import { FlightTicket } from '../model-classes/flight-ticket';
 
 @Injectable()
 export class BookService {
@@ -19,8 +19,9 @@ export class BookService {
 
   constructor(private _http: Http) { }
 
-  createFlightBook(bookFlight: BookFlight) {
-    return this._http.post(this.baseUrl + '/book-flight', JSON.stringify(bookFlight), this.options).map((response: Response) => response.json())
+  createFlightTicket(flightTicket: FlightTicket) {
+    alert('Successfully booked');
+    return this._http.post(this.baseUrl + '/book-flight', JSON.stringify(flightTicket), this.options).map((response: Response) => response.json())
       .catch(this.errorHandler);
   }
 
@@ -43,8 +44,8 @@ export class BookService {
       .catch(this.errorHandler);
   }
 
-  cancelBooking(book: BookFlight) {
-    return this._http.get(this.baseUrl + '/delete/' + book.id, JSON.stringify(book)).map((response: Response) => response.json())
+  cancelFlightTicket(flightTicket: FlightTicket) {
+    return this._http.get(this.baseUrl + '/delete/' + flightTicket.id, JSON.stringify(flightTicket)).map((response: Response) => response.json())
       .catch(this.errorHandler);
   }
 

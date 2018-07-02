@@ -1,3 +1,5 @@
+import { User } from "./user";
+
 export class FlightTicket {
     id: number;
     flightName: String;
@@ -8,5 +10,7 @@ export class FlightTicket {
     departureDate: String;
     departureCity: String;
     arrivalCity: String;
-    seat: number;
+    seat: number; 
+    arrivalTime: String;
+    travellerId: number;
 }

@@ -27,22 +27,23 @@
 </nav>
 <div class="container text-center border border-primary rounded">
   <h3>Sign in to Travelstart</h3>
-  <form class="form-horizontal" #userFrom="ngForm" (ngSubmit)="onSubmit(userFrom.value)">
-    <div *ngIf="loginError!=null" class="alert alert-danger form group">
-        
-    </div>
+  <form class="form-horizontal" #userFrom="ngForm">
     <div class="form group">
       <label>Email address
-        <input type="text" name="email" class="form-control" ngModel>
+        <input type="text" name="email" class="form-control" #email="ngModel" ngModel required>
       </label>
+      <div style="color: red;" *ngIf="email.invalid && email.touched">Email address is required.</div>
     </div>
     <div class="form group">
       <label>Password
-        <input type="password" name="password" class="form-control" ngModel>
+        <input type="password" name="password" class="form-control" #password="ngModel" ngModel required>
       </label>
+      <div style="color: red;" *ngIf="password.invalid && password.touched">Password is required.</div>
     </div>
-    <br>
-    <input type="submit" value="Sign in" class="btn btn-primary">
+    <div>
+      <button class="btn btn-link" id="Password" href="#" (click)="forgotPassword(email.value)">Forgot password?</button>
+    </div>
+    <input [disabled]="userFrom.invalid" type="submit" value="Sign in" class="btn btn-primary" (click)="onSubmit(userFrom.value)">
   </form>
   <div>Don't have an account?
     <a routerLink="/sign-up">

@@ -152,6 +152,7 @@ export class AdminprofileComponent implements OnInit {
       this.Bookings = null;
       sessionStorage.setItem('FlightsAdminSelectedTab', JSON.stringify('Profile'));
     }
+    
     if ('' + value == 'Bookings') {
       this.FlightsAddition = null;
       this.SavedFlights = null;

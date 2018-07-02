@@ -69,4 +69,8 @@ export class UserService {
       .catch(this.errorHandler);
   }
 
+  retrievePassword(email: String) {
+    return this._http.get(this.baseUrl + '/forgot-password/' + email, this.options).map((response: Response) => response.json())
+      .catch(this.errorHandler);
+  }
 }
